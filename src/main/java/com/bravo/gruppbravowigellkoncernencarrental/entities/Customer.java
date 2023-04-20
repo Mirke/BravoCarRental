@@ -7,7 +7,7 @@ public class Customer {
     //Karins förslag
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", nullable = false)
+    @Column(name = "CustomerId", nullable = false)
     private Long id;
 
     public Long getId() {

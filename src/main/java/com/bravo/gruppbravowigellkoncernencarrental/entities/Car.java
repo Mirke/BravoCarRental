@@ -7,7 +7,7 @@ public class Car {
     //Karins förslag
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "id", nullable = false)
+    @Column(name = "CarId", nullable = false)
     private Long id;
 
     public Long
