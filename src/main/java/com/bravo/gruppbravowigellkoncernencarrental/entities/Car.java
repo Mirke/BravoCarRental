@@ -4,6 +4,7 @@ import javax.persistence.*;
 
 @Entity
 public class Car {
+    //Karins förslag
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "id", nullable = false)

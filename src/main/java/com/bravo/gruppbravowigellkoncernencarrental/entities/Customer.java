@@ -4,6 +4,7 @@ import javax.persistence.*;
 
 @Entity
 public class Customer {
+    //Karins förslag
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
