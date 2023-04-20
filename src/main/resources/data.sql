@@ -8,6 +8,6 @@ VALUES  ('Anita', 'Andersson', 'Blomvägen 2', '80348', 'Bergby', 'anita.hemma@h
 INSERT INTO car (carSize, costPerDay, available )
 VALUES ('small typ Fiat Punto', '479', true),
        ('medium', '849 typ VW Passat', true),
-       ('medium'), '859 typ VW Passat', true),
+       ('medium', '859 typ VW Passat', true),
         ('large typ Volvo XC90', '1249', true),
         ('large typ Volvo XC90', '1329', true);
