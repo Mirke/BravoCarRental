@@ -23,12 +23,7 @@ public class AdminController {
     //   Properties
     // -----------------------------------------------------------------------------------------------------------------
 
-    // TODO - Needs Property Admin Services
-
-    /*
-    @Autowired
-    private AdminService adminService;
-    */
+    // TODO - Needs OrderService
 
     @Autowired
     private CarService carService;
@@ -40,8 +35,6 @@ public class AdminController {
     // -----------------------------------------------------------------------------------------------------------------
     //   Methods CRUD
     // -----------------------------------------------------------------------------------------------------------------
-
-    // TODO - Needs @GetMapping, for "api/v1/allcars", which uses admin Service to get all cars in database
 
     @GetMapping("api/v1/allcars")
     public List<Car> getAllCars(){return carService.getCars();}
@@ -74,9 +67,6 @@ public class AdminController {
         return ResponseEntity.ok(adminService.updateCar(car, car.getId()));
     }
     */
-
-    // TODO - Needs @GetMapping, for "api/v1/customers", which uses admin Service get all customers in database
-
 
     @GetMapping("api/v1/customers")
     public List<Customer> getCustomers(){ return customerService.getCustomers();}

@@ -2,6 +2,12 @@ package com.bravo.gruppbravowigellkoncernencarrental.entities;
 
 import javax.persistence.*;
 
+/**
+ * <code>Car</code> - Car entity
+ * @authors Karin
+ * @version 0.0.1
+ */
+
 @Entity
 public class Car {
     //Karins förslag
