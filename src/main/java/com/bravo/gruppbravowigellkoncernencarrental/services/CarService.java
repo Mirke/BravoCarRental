@@ -25,10 +25,10 @@ public class CarService implements ICarService {
     }
 
     @Override
-    public List<CarDto> getCars() {
+    public List<Car> getCars() {
         List<Car> cars = new ArrayList<>();
         carRepository.findAll().forEach(cars::add);
-        return ObjectConverter.ConvertToCarDto(cars);
+        return cars;
     }
 
     @Override

@@ -25,10 +25,10 @@ public class CustomerService implements ICustomerService {
     }
 
     @Override
-    public List<CustomerDto> getCustomers() {
+    public List<Customer> getCustomers() {
         List<Customer> customers = new ArrayList<>();
         customerRepository.findAll().forEach(customers::add);
-        return ObjectConverter.ConvertToCustomerDto(customers);
+        return customers;
     }
 
     @Override

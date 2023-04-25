@@ -1,6 +1,14 @@
 package com.bravo.gruppbravowigellkoncernencarrental.controllers;
 
+import com.bravo.gruppbravowigellkoncernencarrental.entities.Car;
+import com.bravo.gruppbravowigellkoncernencarrental.entities.Customer;
+import com.bravo.gruppbravowigellkoncernencarrental.services.CarService;
+import com.bravo.gruppbravowigellkoncernencarrental.services.CustomerService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 /**
  * <code>AdminController</code> - CRUD commands for admin
@@ -22,6 +30,12 @@ public class AdminController {
     private AdminService adminService;
     */
 
+    @Autowired
+    private CarService carService;
+
+    @Autowired
+    private CustomerService customerService;
+
 
     // -----------------------------------------------------------------------------------------------------------------
     //   Methods CRUD
@@ -29,10 +43,9 @@ public class AdminController {
 
     // TODO - Needs @GetMapping, for "api/v1/allcars", which uses admin Service to get all cars in database
 
-    /*
     @GetMapping("api/v1/allcars")
-    public List<Car> getAllCars(){return adminService.getAllCars();}
-    */
+    public List<Car> getAllCars(){return carService.getCars();}
+
 
     // TODO - Needs @PostMapping, for "api/v1/addcar", which uses admin Service to add car to database
 
@@ -64,10 +77,10 @@ public class AdminController {
 
     // TODO - Needs @GetMapping, for "api/v1/customers", which uses admin Service get all customers in database
 
-    /*
+
     @GetMapping("api/v1/customers")
-    public List<Customer> getCustomers(){ return adminService.getCustomers();}
-    */
+    public List<Customer> getCustomers(){ return customerService.getCustomers();}
+
 
     // TODO - Needs @PostMapping, for "api/v1/addcustomer", which uses admin Service to add a customer to database
 
