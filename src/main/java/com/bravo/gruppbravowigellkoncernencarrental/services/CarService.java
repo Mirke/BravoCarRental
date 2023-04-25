@@ -4,11 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
-
 import com.bravo.gruppbravowigellkoncernencarrental.entities.Car;
 import com.bravo.gruppbravowigellkoncernencarrental.models.dto.CarDto;
 import com.bravo.gruppbravowigellkoncernencarrental.repositories.ICarRepository;
 import com.bravo.gruppbravowigellkoncernencarrental.utilities.ObjectConverter;
+
+/**
+ * <code>CarService</code> - Service methods for car entities
+ * @authors Jessica
+ * @version 0.0.1
+ */
 
 @Service
 public class CarService implements ICarService {
@@ -25,10 +30,10 @@ public class CarService implements ICarService {
     }
 
     @Override
-    public List<CarDto> getCars() {
+    public List<Car> getCars() {
         List<Car> cars = new ArrayList<>();
         carRepository.findAll().forEach(cars::add);
-        return ObjectConverter.ConvertToCarDto(cars);
+        return cars;
     }
 
     @Override

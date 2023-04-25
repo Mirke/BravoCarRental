@@ -8,6 +8,12 @@ import javax.servlet.http.PushBuilder;
 import com.bravo.gruppbravowigellkoncernencarrental.entities.*;
 import com.bravo.gruppbravowigellkoncernencarrental.models.dto.*;
 
+/**
+ * <code>ObjectConverter</code> - Utility class for converting CarDto and CustomerDto entities to Customer and Customer.
+ * @authors Jessica
+ * @version 0.0.1
+ */
+
 public class ObjectConverter {
 
     // ############### Car ################//#

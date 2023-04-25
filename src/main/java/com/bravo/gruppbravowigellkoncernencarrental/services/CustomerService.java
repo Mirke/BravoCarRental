@@ -4,11 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
-
 import com.bravo.gruppbravowigellkoncernencarrental.entities.Customer;
 import com.bravo.gruppbravowigellkoncernencarrental.models.dto.CustomerDto;
 import com.bravo.gruppbravowigellkoncernencarrental.repositories.ICustomerRepository;
 import com.bravo.gruppbravowigellkoncernencarrental.utilities.ObjectConverter;
+
+/**
+ * <code>CustomerService</code> - Service methods for customer entities
+ * @authors Jessica
+ * @version 0.0.1
+ */
 
 @Service
 public class CustomerService implements ICustomerService {
@@ -25,10 +30,10 @@ public class CustomerService implements ICustomerService {
     }
 
     @Override
-    public List<CustomerDto> getCustomers() {
+    public List<Customer> getCustomers() {
         List<Customer> customers = new ArrayList<>();
         customerRepository.findAll().forEach(customers::add);
-        return ObjectConverter.ConvertToCustomerDto(customers);
+        return customers;
     }
 
     @Override

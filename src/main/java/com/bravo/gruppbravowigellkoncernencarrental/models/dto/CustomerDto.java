@@ -1,5 +1,11 @@
 package com.bravo.gruppbravowigellkoncernencarrental.models.dto;
 
+/**
+ * <code>CustomerDto</code> - Customer Dto entity
+ * @authors Jessica
+ * @version 0.0.1
+ */
+
 public class CustomerDto {
     
     private Long id;

@@ -2,6 +2,7 @@ DROP TABLE IF EXISTS car;
 DROP TABLE IF EXISTS customer;
 
 CREATE TABLE customer (
+    id INT AUTO_INCREMENT PRIMARY KEY,
     firstName VARCHAR(90) NOT NULL,
     lastName VARCHAR(90) NOT NULL,
     streetAddress VARCHAR(90) NOT NULL,
@@ -12,6 +13,7 @@ CREATE TABLE customer (
 );
 
 CREATE TABLE car (
+    id INT AUTO_INCREMENT PRIMARY KEY,
     carSize VARCHAR(90),
     costPerDay VARCHAR(90),
     available BOOL
