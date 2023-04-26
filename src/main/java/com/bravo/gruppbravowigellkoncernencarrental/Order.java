@@ -5,6 +5,7 @@ import com.bravo.gruppbravowigellkoncernencarrental.entities.Customer;
 
 import javax.persistence.*;
 
+/**@Authors Nicolina**/
 @Entity
 public class Order {
     @Id
