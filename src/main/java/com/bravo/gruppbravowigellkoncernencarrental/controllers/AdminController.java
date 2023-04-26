@@ -6,7 +6,6 @@ import com.bravo.gruppbravowigellkoncernencarrental.models.dto.CarDto;
 import com.bravo.gruppbravowigellkoncernencarrental.models.dto.CustomerDto;
 import com.bravo.gruppbravowigellkoncernencarrental.repositories.ICarRepository;
 import com.bravo.gruppbravowigellkoncernencarrental.repositories.ICustomerRepository;
-import com.bravo.gruppbravowigellkoncernencarrental.services.AdminService;
 import com.bravo.gruppbravowigellkoncernencarrental.services.CarService;
 import com.bravo.gruppbravowigellkoncernencarrental.services.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,13 +34,11 @@ public class AdminController {
     @Autowired
     private CarService carService;
     @Autowired
- ICustomerRepository customerRepository;
+    ICustomerRepository customerRepository;
     @Autowired
     ICarRepository carRepository;
     @Autowired
     private CustomerService customerService;
-    @Autowired
-    private AdminService adminService;
 
 
     // -----------------------------------------------------------------------------------------------------------------
@@ -51,15 +48,18 @@ public class AdminController {
     @GetMapping("api/v1/allcars")
     public List<Car> getAllCars(){return carService.getCars();}
 
-
+    /**
+     * <code>AdminController</code> - CRUD(add car) commands for admin
+     * @authors Jean Kadahizi (jean.kadahizi@edu.edugrade.se)
+     * @version 0.0.1
+     * @return
+     */
     @PostMapping("api/v1/addcar")
-    public  ResponseEntity<CarDto> addcar(@RequestBody CarDto car) {
+    public  ResponseEntity<CarDto> addCar(@RequestBody CarDto car) {
         carService.addCar(car);
         System.out.println("Admin added new car");
         return new ResponseEntity<>(car,HttpStatus.CREATED);
     }
-
-
 
     /**
      * <code>AdminController</code> - CRUD(update car) commands for admin
@@ -71,7 +71,7 @@ public class AdminController {
     public  ResponseEntity<CarDto> updateCar(@RequestBody CarDto car){
         Optional<Car> carItem = carRepository.findById(car.getId());
         if(carItem.isPresent()){
-            adminService.updateCar(car);
+            carService.updateCar(car);
             System.out.println("admin updated car");
             return  new ResponseEntity<>(car,HttpStatus.OK);
         }
@@ -88,7 +88,7 @@ public class AdminController {
     public ResponseEntity<String> deleteCar(@RequestBody Car car){
         Optional<Car> carItem = carRepository.findById(car.getId());
         if(carItem.isPresent()){
-            adminService.RemoveCar(car.getId());
+            carService.RemoveCar(car.getId());
             return new ResponseEntity<>("Car deleted!", HttpStatus.OK);
         }
         return new ResponseEntity<>("Car not deleted!", HttpStatus.NO_CONTENT);
@@ -104,8 +104,8 @@ public class AdminController {
      * @authors Jean Kadahizi (jean.kadahizi@edu.edugrade.se)
      * @version 0.0.1
      */
-    @PostMapping("api/v1/addCustomer")
-    public  ResponseEntity<CustomerDto> saveCar(@RequestBody CustomerDto customer) {
+    @PostMapping("api/v1/addcustomer")
+    public  ResponseEntity<CustomerDto> addCustomer(@RequestBody CustomerDto customer) {
         customerService.addCustomer(customer);
         System.out.println("Admin added new car");
         return new ResponseEntity<>(customer,HttpStatus.CREATED);
@@ -121,7 +121,7 @@ public class AdminController {
     public  ResponseEntity<CustomerDto> updateCustomer(@RequestBody CustomerDto customer){
         Optional<Customer> customerItem = customerRepository.findById(customer.getId());
         if(customerItem.isPresent()){
-            adminService.updateCustomer(customer);
+            customerService.updateCustomer(customer);
             System.out.println("admin updated customer");
             return  new ResponseEntity<>(customer,HttpStatus.OK);
         }
@@ -140,7 +140,7 @@ public class AdminController {
     public ResponseEntity<String> deleteCustomer(@RequestBody Customer customer){
         Optional<Customer> customerItem = customerRepository.findById(customer.getId());
         if(customerItem.isPresent()){
-            adminService.RemoveCustomer(customer.getId());
+            customerService.RemoveCustomer(customer.getId());
             return new ResponseEntity<>("Customer deleted!", HttpStatus.OK);
         }
         return new ResponseEntity<>("Customer not deleted!", HttpStatus.NO_CONTENT);
