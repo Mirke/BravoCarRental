@@ -1,8 +1,5 @@
 package com.bravo.gruppbravowigellkoncernencarrental.entities;
 
-import com.bravo.gruppbravowigellkoncernencarrental.entities.Car;
-import com.bravo.gruppbravowigellkoncernencarrental.entities.Customer;
-
 import javax.persistence.*;
 
 /**
@@ -12,19 +9,12 @@ import javax.persistence.*;
  * */
 
 @Entity
-public class Order {
+public class Orders {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID", nullable = false)
-    private Long OrderID;
-
-    public Long getId() {
-        return OrderID;
-    }
-
-    public void setId(Long id) {
-        this.OrderID = id;
-    }
+    @Column(name = "id", nullable = false)
+    private Long id;
 
     @ManyToOne
     private Car car;
@@ -32,21 +22,26 @@ public class Order {
     @ManyToOne
     private Customer customer;
 
-    public Order() {
+    public Orders() {
     }
 
-    public Order(Long orderID, Car car, Customer customer) {
-        OrderID = orderID;
+    public Orders(Car car, Customer customer) {
         this.car = car;
         this.customer = customer;
     }
 
-    public Long getOrderID() {
-        return OrderID;
+    public Orders(Long id) {
+        this.id = id;
+        this.car = car;
+        this.customer = customer;
     }
 
-    public void setOrderID(Long orderID) {
-        OrderID = orderID;
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Car getCar() {

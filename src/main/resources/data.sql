@@ -1,3 +1,6 @@
+
+
+
 INSERT INTO customer (firstName, lastName, streetAddress, postalCode, city, email, phone)
 VALUES  ('Anita', 'Andersson', 'Blomvägen 2', '80348', 'Bergby', 'anita.hemma@hotmail.com', '0762485251'),
         ('Anders', 'Lindgren', 'Sportvägen9', '31528', 'Målilla', 'a.lindgren@gmail.com', '074594549'),
@@ -11,3 +14,8 @@ VALUES ('small typ Fiat Punto', '479', true),
        ('medium typ VW Passat', '859', true),
         ('large typ Volvo XC90', '1249', true),
         ('large typ Volvo XC90', '1329', true);
+
+INSERT  INTO orders(id)
+VALUES ( 1 ),
+       ( 2 ),
+       ( 3 );
