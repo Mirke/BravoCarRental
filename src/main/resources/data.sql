@@ -18,6 +18,4 @@ VALUES ('small typ Fiat Punto', '479', true),
 INSERT  INTO orders(id)
 VALUES ( 1 ),
        ( 2 ),
-       ( 3 ),
-       ( 4 ),
-       ( 5 );
+       ( 3 );
