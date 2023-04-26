@@ -1,4 +1,4 @@
-package com.bravo.gruppbravowigellkoncernencarrental;
+package com.bravo.gruppbravowigellkoncernencarrental.entities;
 
 import com.bravo.gruppbravowigellkoncernencarrental.entities.Car;
 import com.bravo.gruppbravowigellkoncernencarrental.entities.Customer;
@@ -7,7 +7,9 @@ import javax.persistence.*;
 
 /**
  * * <code>Order</code> - Order Entity
- * @Authors Nicolina*/
+ * @Authors Nicolina Larsson
+ * @version 0.0.1
+ * */
 
 @Entity
 public class Order {
