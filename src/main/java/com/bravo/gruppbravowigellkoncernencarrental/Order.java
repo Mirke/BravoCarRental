@@ -5,7 +5,10 @@ import com.bravo.gruppbravowigellkoncernencarrental.entities.Customer;
 
 import javax.persistence.*;
 
-/**@Authors Nicolina**/
+/**
+ * * <code>Order</code> - Order Entity
+ * @Authors Nicolina*/
+
 @Entity
 public class Order {
     @Id
