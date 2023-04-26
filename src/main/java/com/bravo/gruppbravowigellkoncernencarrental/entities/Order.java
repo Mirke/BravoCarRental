@@ -28,6 +28,8 @@ public class Order {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date returnDate;
 
+    private boolean current;
+
     @OneToOne
     @JoinColumn(name = "CustomerId")
     private Customer customer;
@@ -55,12 +57,15 @@ public class Order {
     public Order() {
     }
 
-    public Order(Long id, Date orderDate, Date bookedFrom, Date returnDate) {
+    public Order(Long id, Date orderDate, Date bookedFrom, Date returnDate, boolean current, Customer customer, Car car) {
         this.id = id;
         this.orderDate = orderDate;
         this.bookedFrom = bookedFrom;
         this.returnDate = returnDate;
-        }
+        this.current = current;
+        this.customer = customer;
+        this.car = car;
+    }
 
     public Date getOrderDate() {
         return orderDate;
@@ -84,5 +89,13 @@ public class Order {
 
     public void setReturnDate(Date returnDate) {
         this.returnDate = returnDate;
+    }
+
+    public boolean isCurrent() {
+        return current;
+    }
+
+    public void setCurrent(boolean current) {
+        this.current = current;
     }
 }
