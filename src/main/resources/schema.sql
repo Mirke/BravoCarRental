@@ -1,5 +1,6 @@
 DROP TABLE IF EXISTS car;
 DROP TABLE IF EXISTS customer;
+DROP TABLE IF EXISTS order;
 
 CREATE TABLE customer (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -17,4 +18,8 @@ CREATE TABLE car (
     carSize VARCHAR(90),
     costPerDay VARCHAR(90),
     available BOOL
+);
+
+CREATE TABLE order (
+    ID INT AUTO_INCREMENT PRIMARY KEY
 );
