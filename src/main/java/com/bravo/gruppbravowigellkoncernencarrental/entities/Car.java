@@ -12,7 +12,7 @@ import javax.persistence.*;
 public class Car {
     //Karins förslag
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
 
