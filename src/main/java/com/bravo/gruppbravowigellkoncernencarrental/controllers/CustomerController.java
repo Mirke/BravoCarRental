@@ -6,6 +6,7 @@ import com.bravo.gruppbravowigellkoncernencarrental.models.dto.CustomerDto;
 import com.bravo.gruppbravowigellkoncernencarrental.repositories.ICustomerRepository;
 import com.bravo.gruppbravowigellkoncernencarrental.services.CarService;
 import com.bravo.gruppbravowigellkoncernencarrental.services.CustomerService;
+import com.bravo.gruppbravowigellkoncernencarrental.services.IOrdersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,30 +15,46 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 /** <code>CustomerController</code> - CRUD commands for customer
-  * @authors Nicolina Larsson
+  * @authors Nicolina Larsson (Creator) / Mikael Eriksson (Editor)
   * @version 0.0.1
   */
 
 @RestController
 public class CustomerController {
+
     @Autowired
-     private CustomerService customerService;
+    private IOrdersService iOrdersService;
 
-
-    @GetMapping("api/v1/allCustomers")
-    public List<Customer> getCustomers(){return customerService.getCustomers();
+    // TODO - Customer version of getting cars that does not show the ones that are booked
+    /*
+    @GetMapping("api/v1/cars")
+    public List<Customer> getCars(){return customerService.getCarsForCustomer();
     }
+    */
 
-  /*  @PutMapping("/admin/v1/updateCustomer")
-    public ResponseEntity<Customer> updateCustomer(@RequestBody Customer customer){
-        customerService.updateCustomer(customer.getId());
-        return ResponseEntity.ok(customerService.updateCustomer(Customer, customer.getId()));
-    }*/
-
-
-    @DeleteMapping("/admin/v1/delete/ID")
-    public ResponseEntity<String> removeCustomer(@PathVariable ("id") long id){
-        customerService.RemoveCustomer(id);
-        return new ResponseEntity<String>("Customer deleted", HttpStatus.OK);
+    // TODO - Customer version of ordering a car
+    /*
+    @PostMapping("api/v1/ordercar")
+    public Orders orderCarForCustomer(Long id){
+        return iOrdersService.orderCar(id);
     }
+    */
+
+    // TODO - Customer version of canceling an order
+    /*
+    @PutMapping("api/v1/cancelorder")
+    public Orders customerCancelsOrder(Long id){
+        return iOrdersService.cancelOrder(id);
+    }
+    */
+
+    // TODO - Customer version of them being able to view all of their orders.
+    /*
+    @GetMapping("api/v1/myorders")
+    public List<Orders> customersOrders(){
+        return customerService.getCustomersOrders();
+    }
+    */
+
+
 }
