@@ -1,10 +1,12 @@
 package com.bravo.gruppbravowigellkoncernencarrental.services;
 
+import com.bravo.gruppbravowigellkoncernencarrental.entities.Car;
 import com.bravo.gruppbravowigellkoncernencarrental.entities.Orders;
 import com.bravo.gruppbravowigellkoncernencarrental.repositories.IOrdersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -19,11 +21,11 @@ public class OrdersService implements IOrdersService {
     @Autowired
     IOrdersRepository iOrdersRepository;
 
-    // TODO - Needs to get all of the orders in the repository
-
     @Override
     public List<Orders> getAllOrders() {
-        return null;
+        List<Orders> orders = new ArrayList<>();
+        iOrdersRepository.findAll().forEach(orders::add);
+        return orders;
     }
 
     // TODO - Needs to get all of the orders made by a customer

@@ -2,6 +2,7 @@ package com.bravo.gruppbravowigellkoncernencarrental.controllers;
 
 import com.bravo.gruppbravowigellkoncernencarrental.entities.Car;
 import com.bravo.gruppbravowigellkoncernencarrental.entities.Customer;
+import com.bravo.gruppbravowigellkoncernencarrental.entities.Orders;
 import com.bravo.gruppbravowigellkoncernencarrental.models.dto.CarDto;
 import com.bravo.gruppbravowigellkoncernencarrental.models.dto.CustomerDto;
 import com.bravo.gruppbravowigellkoncernencarrental.repositories.ICarRepository;
@@ -152,13 +153,10 @@ public class AdminController {
         return new ResponseEntity<>("Customer not deleted!", HttpStatus.NO_CONTENT);
     }
 
-    // TODO - List all of the order made by customers
-    /*
     @GetMapping("api/v1/orders")
     public List<Orders> getAllOrders(){
         return ordersService.getAllOrders();
     }
-    */
 
     // TODO - Remove an order, which are made by customers
     /*

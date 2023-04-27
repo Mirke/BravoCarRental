@@ -15,7 +15,7 @@ VALUES ('small typ Fiat Punto', '479', true),
         ('large typ Volvo XC90', '1249', true),
         ('large typ Volvo XC90', '1329', true);
 
-INSERT  INTO orders(id)
-VALUES ( 1 ),
-       ( 2 ),
-       ( 3 );
+INSERT  INTO orders(id,orderDate,bookedFrom,returnDate,CarId,CustomerId)
+VALUES ( 1, '1988-09-09','1988-09-10', '1988-10-10',1,1),
+       ( 2, '1989-09-09','1989-09-10', '1989-10-10',2,2),
+       ( 3, '1990-09-09','1990-09-10', '1990-10-10',3,3);

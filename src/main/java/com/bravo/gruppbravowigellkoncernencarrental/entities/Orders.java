@@ -1,5 +1,6 @@
 package com.bravo.gruppbravowigellkoncernencarrental.entities;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -19,13 +20,13 @@ public class Orders {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "yyyy-MM-dd")
     private Date orderDate;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "yyyy-MM-dd")
     private Date bookedFrom;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "yyyy-MM-dd")
     private Date returnDate;
 
     @OneToOne
@@ -36,8 +37,6 @@ public class Orders {
     @JoinColumn(name = "CustomerId")
     private Customer customer;
 
-    private boolean current;
-
     public Orders() {
     }
 
@@ -45,22 +44,22 @@ public class Orders {
         this.id = id;
     }
 
-    public Orders(Long id, Date orderDate, Date bookedFrom, Date returnDate, Car car, Customer customer, boolean current) {
+
+    public Orders(Long id, Date orderDate, Date bookedFrom, Date returnDate, Car car) {
+        this.id = id;
+        this.orderDate = orderDate;
+        this.bookedFrom = bookedFrom;
+        this.returnDate = returnDate;
+        this.car = car;
+    }
+
+    public Orders(Long id, Date orderDate, Date bookedFrom, Date returnDate, Car car, Customer customer) {
         this.id = id;
         this.orderDate = orderDate;
         this.bookedFrom = bookedFrom;
         this.returnDate = returnDate;
         this.car = car;
         this.customer = customer;
-        this.current = current;
-    }
-
-    public boolean isCurrent() {
-        return current;
-    }
-
-    public void setCurrent(boolean current) {
-        this.current = current;
     }
 
     public Date getOrderDate() {
