@@ -2,6 +2,7 @@ package com.bravo.gruppbravowigellkoncernencarrental.repositories;
 
 import com.bravo.gruppbravowigellkoncernencarrental.entities.Orders;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
 /**
  * <code>IOrdersRepository</code> - CRUD repository for Orders entities
@@ -9,5 +10,6 @@ import org.springframework.data.repository.CrudRepository;
  * @version 0.0.1
  */
 
+@Repository
 public interface IOrdersRepository extends CrudRepository<Orders,Long> {
 }
