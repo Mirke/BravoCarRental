@@ -6,8 +6,10 @@ import com.bravo.gruppbravowigellkoncernencarrental.models.dto.CarDto;
 import com.bravo.gruppbravowigellkoncernencarrental.models.dto.CustomerDto;
 import com.bravo.gruppbravowigellkoncernencarrental.repositories.ICarRepository;
 import com.bravo.gruppbravowigellkoncernencarrental.repositories.ICustomerRepository;
+import com.bravo.gruppbravowigellkoncernencarrental.repositories.IOrdersRepository;
 import com.bravo.gruppbravowigellkoncernencarrental.services.CarService;
 import com.bravo.gruppbravowigellkoncernencarrental.services.CustomerService;
+import com.bravo.gruppbravowigellkoncernencarrental.services.OrdersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +20,7 @@ import java.util.Optional;
 
 /**
  * <code>AdminController</code> - CRUD commands for admin
- * @authors Mikael Eriksson (mikael.eriksson@edu.edugrade.se)
+ * @authors Mikael Eriksson (mikael.eriksson@edu.edugrade.se) (Creator) / Jean Kadahizi (jean.kadahizi@edu.edugrade.se) (Editor)
  * @version 0.0.1
  */
 
@@ -39,6 +41,10 @@ public class AdminController {
     ICarRepository carRepository;
     @Autowired
     private CustomerService customerService;
+    @Autowired
+    IOrdersRepository iOrdersRepository;
+    @Autowired
+    private OrdersService ordersService;
 
 
     // -----------------------------------------------------------------------------------------------------------------
@@ -88,7 +94,7 @@ public class AdminController {
     public ResponseEntity<String> deleteCar(@RequestBody Car car){
         Optional<Car> carItem = carRepository.findById(car.getId());
         if(carItem.isPresent()){
-            carService.RemoveCar(car.getId());
+            carService.removeCar(car.getId());
             return new ResponseEntity<>("Car deleted!", HttpStatus.OK);
         }
         return new ResponseEntity<>("Car not deleted!", HttpStatus.NO_CONTENT);
@@ -146,6 +152,19 @@ public class AdminController {
         return new ResponseEntity<>("Customer not deleted!", HttpStatus.NO_CONTENT);
     }
 
+    // TODO - List all of the order made by customers
+    /*
+    @GetMapping("api/v1/orders")
+    public List<Orders> getAllOrders(){
+        return ordersService.getAllOrders();
+    }
+    */
 
-
+    // TODO - Remove an order, which are made by customers
+    /*
+    @GetMapping("api/v1/deleteorder")
+    public List<Orders> deleteOrder(Long id){
+        return ordersService.removeOrder(id);
+    }
+    */
 }
