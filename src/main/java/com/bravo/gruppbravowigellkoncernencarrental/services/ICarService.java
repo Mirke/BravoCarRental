@@ -16,5 +16,5 @@ public interface ICarService {
     List<Car> getCars();
     CarDto getCar(Long id);
     void updateCar(CarDto dto);
-    void RemoveCar(Long id);
+    void removeCar(Long id);
 }
