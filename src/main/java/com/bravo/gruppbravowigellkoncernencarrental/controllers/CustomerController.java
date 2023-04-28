@@ -2,59 +2,66 @@ package com.bravo.gruppbravowigellkoncernencarrental.controllers;
 
 import com.bravo.gruppbravowigellkoncernencarrental.entities.Car;
 import com.bravo.gruppbravowigellkoncernencarrental.entities.Customer;
+import com.bravo.gruppbravowigellkoncernencarrental.entities.Orders;
+import com.bravo.gruppbravowigellkoncernencarrental.models.dto.CarDto;
 import com.bravo.gruppbravowigellkoncernencarrental.models.dto.CustomerDto;
+import com.bravo.gruppbravowigellkoncernencarrental.repositories.ICarRepository;
 import com.bravo.gruppbravowigellkoncernencarrental.repositories.ICustomerRepository;
+import com.bravo.gruppbravowigellkoncernencarrental.repositories.IOrdersRepository;
 import com.bravo.gruppbravowigellkoncernencarrental.services.CarService;
 import com.bravo.gruppbravowigellkoncernencarrental.services.CustomerService;
-import com.bravo.gruppbravowigellkoncernencarrental.services.IOrdersService;
+import com.bravo.gruppbravowigellkoncernencarrental.services.OrdersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
-/** <code>CustomerController</code> - CRUD commands for customer
-  * @authors Nicolina Larsson (Creator) / Mikael Eriksson (Editor)
+import static org.springframework.data.jpa.domain.AbstractPersistable_.ID;
+import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
+
+/** <code>CustomerController</code> - CRUD commands for customers
+  * @authors Nicolina Larsson
   * @version 0.0.1
   */
 
 @RestController
 public class CustomerController {
-
     @Autowired
-    private IOrdersService iOrdersService;
+    private OrdersService ordersService;
+    @Autowired
+    private CarService carService;
+    @Autowired
+    private IOrdersRepository iOrdersRepository;
+    @Autowired
+    private ICarRepository iCarRepository;
 
-    // TODO - Customer version of getting cars that does not show the ones that are booked
-    /*
-    @GetMapping("api/v1/cars")
-    public List<Customer> getCars(){return customerService.getCarsForCustomer();
+
+    @GetMapping("api/v1/myOrders")
+    public List<Orders> getOrders(){
+        return ordersService.getAllOrders();
+}
+
+    @GetMapping("api/v1/allCars")
+    public List<Car> getCars(){
+        return carService.getCars();
     }
-    */
 
-    // TODO - Customer version of ordering a car
+
+    //Methods to order a car, cancel an order are marked out since its repos+service aren't fully done yet
+
     /*
-    @PostMapping("api/v1/ordercar")
-    public Orders orderCarForCustomer(Long id){
-        return iOrdersService.orderCar(id);
-    }
-    */
-
-    // TODO - Customer version of canceling an order
-    /*
-    @PutMapping("api/v1/cancelorder")
-    public Orders customerCancelsOrder(Long id){
-        return iOrdersService.cancelOrder(id);
-    }
-    */
-
-    // TODO - Customer version of them being able to view all of their orders.
-    /*
-    @GetMapping("api/v1/myorders")
-    public List<Orders> customersOrders(){
-        return customerService.getCustomersOrders();
-    }
-    */
-
+    @PostMapping("api/v1/orderCar")
+    public ResponseEntity<Orders> orderCar(@RequestBody Order order){
+        ordersService.addOrder(order);
+        System.out.println("A car was successfully ordered");
+        return new ResponseEntity<>(order, HttpStatus.CREATED);
+    }*/
+  /*  @PutMapping("/admin/cancelOrder")
+    public ResponseEntity<Orders> cancelOrder(@RequestBody Order order){
+        return ResponseEntity.ok(ordersService.cancelOrder(order, ID););
+    }*/
 
 }
