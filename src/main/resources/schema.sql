@@ -17,8 +17,10 @@ CREATE TABLE customer
 CREATE TABLE car
 (
     id         INT AUTO_INCREMENT PRIMARY KEY,
-    carSize    VARCHAR(90),
+    factory VARCHAR(90),
+    model VARCHAR(90),
     costPerDay VARCHAR(90),
+    registrationNumber VARCHAR(90),
     available  BOOL
 );
 
