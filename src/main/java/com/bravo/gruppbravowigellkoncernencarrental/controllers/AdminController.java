@@ -1,5 +1,6 @@
 package com.bravo.gruppbravowigellkoncernencarrental.controllers;
 
+import com.bravo.gruppbravowigellkoncernencarrental.GruppBravoWigellkoncernenCarRentalApplication;
 import com.bravo.gruppbravowigellkoncernencarrental.entities.Car;
 import com.bravo.gruppbravowigellkoncernencarrental.entities.Customer;
 import com.bravo.gruppbravowigellkoncernencarrental.entities.Orders;
@@ -11,6 +12,8 @@ import com.bravo.gruppbravowigellkoncernencarrental.repositories.IOrdersReposito
 import com.bravo.gruppbravowigellkoncernencarrental.services.CarService;
 import com.bravo.gruppbravowigellkoncernencarrental.services.CustomerService;
 import com.bravo.gruppbravowigellkoncernencarrental.services.OrdersService;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +24,7 @@ import java.util.Optional;
 
 /**
  * <code>AdminController</code> - CRUD commands for admin
- * @authors Mikael Eriksson (mikael.eriksson@edu.edugrade.se) (Creator) / Jean Kadahizi (jean.kadahizi@edu.edugrade.se) (Editor)
+ * @authors Mikael Eriksson (mikael.eriksson@edu.edugrade.se) (Creator and create Loggers) / Jean Kadahizi (jean.kadahizi@edu.edugrade.se) (Editor)
  * @version 0.0.1
  */
 
@@ -31,8 +34,6 @@ public class AdminController {
     // -----------------------------------------------------------------------------------------------------------------
     //   Properties
     // -----------------------------------------------------------------------------------------------------------------
-
-    // TODO - Needs OrderService
 
     @Autowired
     private CarService carService;
@@ -46,6 +47,8 @@ public class AdminController {
     IOrdersRepository iOrdersRepository;
     @Autowired
     private OrdersService ordersService;
+
+    private static final Logger logger = LogManager.getLogger(AdminController.class);
 
 
     // -----------------------------------------------------------------------------------------------------------------
@@ -64,7 +67,7 @@ public class AdminController {
     @PostMapping("api/v1/addcar")
     public  ResponseEntity<CarDto> addCar(@RequestBody CarDto car) {
         carService.addCar(car);
-        System.out.println("Admin added new car");
+        logger.info("Admin added new car " + car.getCarSize());
         return new ResponseEntity<>(car,HttpStatus.CREATED);
     }
 
@@ -78,12 +81,12 @@ public class AdminController {
     public  ResponseEntity<CarDto> updateCar(@RequestBody CarDto car){
         Optional<Car> carItem = carRepository.findById(car.getId());
         if(carItem.isPresent()){
+            logger.info("Admin updated car " + carItem.get().getCarSize() + " to " + car.getCarSize());
             carService.updateCar(car);
-            System.out.println("admin updated car");
             return  new ResponseEntity<>(car,HttpStatus.OK);
         }
-
-        return  new ResponseEntity<>(null,HttpStatus.NO_CONTENT);
+        logger.error("Admin couldn't update car with id: " + car.getId());
+        return  new ResponseEntity<>(null,HttpStatus.NOT_FOUND);
     }
     /**
      * <code>AdminController</code> - CRUD(delete car) commands for admin
@@ -95,10 +98,12 @@ public class AdminController {
     public ResponseEntity<String> deleteCar(@RequestBody Car car){
         Optional<Car> carItem = carRepository.findById(car.getId());
         if(carItem.isPresent()){
+            logger.info("Admin deleted car " + carItem.get().getCarSize());
             carService.removeCar(car.getId());
             return new ResponseEntity<>("Car deleted!", HttpStatus.OK);
         }
-        return new ResponseEntity<>("Car not deleted!", HttpStatus.NO_CONTENT);
+        logger.error("Admin couldn't deleted car with id: " + car.getId());
+        return new ResponseEntity<>("Car not deleted!", HttpStatus.NOT_FOUND);
     }
 
 
@@ -114,7 +119,7 @@ public class AdminController {
     @PostMapping("api/v1/addcustomer")
     public  ResponseEntity<CustomerDto> addCustomer(@RequestBody CustomerDto customer) {
         customerService.addCustomer(customer);
-        System.out.println("Admin added new car");
+        logger.info("Admin added new customer " + customer.getFirstName() + " " + customer.getLastName());
         return new ResponseEntity<>(customer,HttpStatus.CREATED);
     }
 
@@ -128,12 +133,12 @@ public class AdminController {
     public  ResponseEntity<CustomerDto> updateCustomer(@RequestBody CustomerDto customer){
         Optional<Customer> customerItem = customerRepository.findById(customer.getId());
         if(customerItem.isPresent()){
+            logger.info("Admin updated customer " + customerItem.get().getFirstName() + " " + customerItem.get().getLastName() + " to " + customer.getFirstName() + " " + customer.getLastName());
             customerService.updateCustomer(customer);
-            System.out.println("admin updated customer");
             return  new ResponseEntity<>(customer,HttpStatus.OK);
         }
-
-        return  new ResponseEntity<>(null,HttpStatus.NO_CONTENT);
+        logger.error("Admin couldn't update customer with id: " + customer.getId());
+        return  new ResponseEntity<>(null,HttpStatus.NOT_FOUND);
     }
 
 
@@ -147,10 +152,12 @@ public class AdminController {
     public ResponseEntity<String> deleteCustomer(@RequestBody Customer customer){
         Optional<Customer> customerItem = customerRepository.findById(customer.getId());
         if(customerItem.isPresent()){
+            logger.info("Admin deleted customer " + customerItem.get().getFirstName() + " " + customerItem.get().getLastName());
             customerService.RemoveCustomer(customer.getId());
             return new ResponseEntity<>("Customer deleted!", HttpStatus.OK);
         }
-        return new ResponseEntity<>("Customer not deleted!", HttpStatus.NO_CONTENT);
+        logger.info("Admin couldn't delete customer with id: " + customer.getId());
+        return new ResponseEntity<>("Customer not deleted!", HttpStatus.NOT_FOUND);
     }
 
     @GetMapping("api/v1/orders")
@@ -159,6 +166,7 @@ public class AdminController {
     }
 
     // TODO - Remove an order, which are made by customers
+    // TODO - Needs to log when admin deletes an order
     /*
     @GetMapping("api/v1/deleteorder")
     public List<Orders> deleteOrder(Long id){
