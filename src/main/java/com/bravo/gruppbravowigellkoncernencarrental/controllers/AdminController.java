@@ -67,7 +67,7 @@ public class AdminController {
     @PostMapping("api/v1/addcar")
     public  ResponseEntity<CarDto> addCar(@RequestBody CarDto car) {
         carService.addCar(car);
-        logger.info("Admin added new car " + car.getCarSize());
+        logger.info("Admin added new car " + car.getFactory() + " " + car.getModel());
         return new ResponseEntity<>(car,HttpStatus.CREATED);
     }
 
@@ -81,7 +81,7 @@ public class AdminController {
     public  ResponseEntity<CarDto> updateCar(@RequestBody CarDto car){
         Optional<Car> carItem = carRepository.findById(car.getId());
         if(carItem.isPresent()){
-            logger.info("Admin updated car " + carItem.get().getCarSize() + " to " + car.getCarSize());
+            logger.info("Admin updated car " + carItem.get().getFactory() + " to " + car.getFactory());
             carService.updateCar(car);
             return  new ResponseEntity<>(car,HttpStatus.OK);
         }
@@ -98,7 +98,7 @@ public class AdminController {
     public ResponseEntity<String> deleteCar(@RequestBody Car car){
         Optional<Car> carItem = carRepository.findById(car.getId());
         if(carItem.isPresent()){
-            logger.info("Admin deleted car " + carItem.get().getCarSize());
+            logger.info("Admin deleted car " + carItem.get().getFactory() + " " + carItem.get().getModel() );
             carService.removeCar(car.getId());
             return new ResponseEntity<>("Car deleted!", HttpStatus.OK);
         }
