@@ -7,10 +7,10 @@ import com.bravo.gruppbravowigellkoncernencarrental.models.dto.CarDto;
 import com.bravo.gruppbravowigellkoncernencarrental.models.dto.CustomerDto;
 import com.bravo.gruppbravowigellkoncernencarrental.repositories.ICarRepository;
 import com.bravo.gruppbravowigellkoncernencarrental.repositories.ICustomerRepository;
-import com.bravo.gruppbravowigellkoncernencarrental.repositories.IOrdersRepository;
+import com.bravo.gruppbravowigellkoncernencarrental.repositories.IOrderRepository;
 import com.bravo.gruppbravowigellkoncernencarrental.services.CarService;
 import com.bravo.gruppbravowigellkoncernencarrental.services.CustomerService;
-import com.bravo.gruppbravowigellkoncernencarrental.services.OrdersService;
+import com.bravo.gruppbravowigellkoncernencarrental.services.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -43,9 +43,9 @@ public class AdminController {
     @Autowired
     private CustomerService customerService;
     @Autowired
-    IOrdersRepository iOrdersRepository;
+    IOrderRepository iOrderRepository;
     @Autowired
-    private OrdersService ordersService;
+    private OrderService orderService;
 
 
     // -----------------------------------------------------------------------------------------------------------------
@@ -155,7 +155,7 @@ public class AdminController {
 
     @GetMapping("api/v1/orders")
     public List<Orders> getAllOrders(){
-        return ordersService.getAllOrders();
+        return orderService.getAllOrders();
     }
 
     // TODO - Remove an order, which are made by customers

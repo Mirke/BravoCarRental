@@ -16,7 +16,7 @@ import com.bravo.gruppbravowigellkoncernencarrental.models.dto.*;
  * @version 0.0.1
  */
 
-public class ObjectConverter {
+public class ObjectMapper {
 
     // ############### Car ################//#
 
