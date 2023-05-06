@@ -37,6 +37,17 @@ public class CarService implements ICarService {
     }
 
     @Override
+    public List<Car> getAvaliableCars() {
+        List<Car> cars = new ArrayList<>();
+        carRepository.findAll().forEach(car -> {
+            if (car.isAvailable()) {
+                cars.add(car);
+            }
+        });
+        return cars;
+    }
+
+    @Override
     public CarDto getCar(Long id) {
         return ObjectMapper.ConvertToCarDto(carRepository.findById(id).get());
     }

@@ -9,16 +9,21 @@ package com.bravo.gruppbravowigellkoncernencarrental.models.dto;
 public class CarDto {
 
     private Long id;
-    private String carSize;
+
+    private String factory;
+    private String model;
     private int costPerDay;
+    private String registrationNumber;
     private boolean available;
 
     public CarDto() {
     }
 
-    public CarDto(String carSize, int costPerDay, boolean available) {
-        this.carSize = carSize;
+    public CarDto(String factory, String model, int costPerDay, String registrationNumber, boolean available) {
+        this.factory = factory;
+        this.model = model;
         this.costPerDay = costPerDay;
+        this.registrationNumber = registrationNumber;
         this.available = available;
     }
 
@@ -28,14 +33,6 @@ public class CarDto {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getCarSize() {
-        return carSize;
-    }
-
-    public void setCarSize(String carSize) {
-        this.carSize = carSize;
     }
 
     public int getCostPerDay() {
@@ -54,4 +51,27 @@ public class CarDto {
         this.available = available;
     }
 
+    public String getRegistrationNumber() {
+        return registrationNumber;
+    }
+
+    public void setRegistrationNumber(String registrationNumber) {
+        this.registrationNumber = registrationNumber;
+    }
+
+    public String getFactory() {
+        return factory;
+    }
+
+    public void setFactory(String factory) {
+        this.factory = factory;
+    }
+
+    public String getModel() {
+        return model;
+    }
+
+    public void setModel(String model) {
+        this.model = model;
+    }
 }

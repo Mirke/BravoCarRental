@@ -4,55 +4,63 @@ import javax.persistence.*;
 
 /**
  * <code>Car</code> - Car entity
- * @authors Karin
+ * @authors Karin (Creator) / Mikael Eriksson (Editor)
  * @version 0.0.1
  */
 
 @Entity
 public class Car {
-    //Karins förslag
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
 
-    public Long
-    getId() {
+    // Mikael la till
+    @Column(length = 10, nullable = false)
+    private String factory;
+
+    // Mikael la till
+    @Column(length = 10, nullable = false)
+    private String model;
+
+    @Column(length = 10, nullable = false)
+    private int costPerDay;
+
+    // Mikael la till
+    @Column(length = 10, nullable = false)
+    private String registrationNumber;
+
+    @Column(nullable = false)
+    private boolean available;
+
+    public Car() {
+
+    }
+
+    public Car(Long id, String factory, String model, int costPerDay, String registrationNumber, boolean available) {
+        this.id = id;
+        this.factory = factory;
+        this.model = model;
+        this.costPerDay = costPerDay;
+        this.registrationNumber = registrationNumber;
+        this.available = available;
+    }
+
+    public Car(String factory, String model, int costPerDay, String registrationNumber, boolean available) {
+        this.factory = factory;
+        this.model = model;
+        this.costPerDay = costPerDay;
+        this.registrationNumber = registrationNumber;
+        this.available = available;
+    }
+
+    public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
-    }
-    @Column(length = 10, nullable = false)
-    private String carSize;
-    @Column(length = 10, nullable = false)
-    private int costPerDay;
-    @Column(nullable = false)
-   private boolean available;
-
-    public Car() {
-    }
-
-    public Car(Long id, String carSize, int costPerDay, boolean available) {
-        this.id = id;
-        this.carSize = carSize;
-        this.costPerDay = costPerDay;
-        this.available = available;
-    }
-
-    public Car(String carSize, int costPerDay, boolean available) {
-        this.carSize = carSize;
-        this.costPerDay = costPerDay;
-        this.available = available;
-    }
-
-    public String getCarSize() {
-        return carSize;
-    }
-
-    public void setCarSize(String carSize) {
-        this.carSize = carSize;
     }
 
     public int getCostPerDay() {
@@ -69,5 +77,30 @@ public class Car {
 
     public void setAvailable(boolean available) {
         this.available = available;
+    }
+
+    public String getRegistrationNumber() {
+        return registrationNumber;
+    }
+
+    // Mikael la till
+    public void setRegistrationNumber(String registrationNumber) {
+        this.registrationNumber = registrationNumber;
+    }
+
+    public String getFactory() {
+        return factory;
+    }
+
+    public void setFactory(String factory) {
+        this.factory = factory;
+    }
+
+    public String getModel() {
+        return model;
+    }
+
+    public void setModel(String model) {
+        this.model = model;
     }
 }

@@ -1,6 +1,9 @@
 package com.bravo.gruppbravowigellkoncernencarrental.models.dto;
 
 import java.util.Date;
+
+import com.bravo.gruppbravowigellkoncernencarrental.entities.Car;
+import com.bravo.gruppbravowigellkoncernencarrental.entities.Customer;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class OrderDto {
@@ -12,8 +15,8 @@ public class OrderDto {
     private Date bookedFrom;
     @JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "yyyy-MM-dd")
     private Date returnDate;
-    private CarDto car;
-    private CustomerDto customer;
+    private Car car;
+    private Customer customer;
 
     public OrderDto(){
 
@@ -51,19 +54,19 @@ public class OrderDto {
         this.returnDate = returnDate;
     }
 
-    public CarDto getCar() {
+    public Car getCar() {
         return car;
     }
 
-    public void setCar(CarDto car) {
+    public void setCar(Car car) {
         this.car = car;
     }
 
-    public CustomerDto getCustomer() {
+    public Customer getCustomer() {
         return customer;
     }
 
-    public void setCustomer(CustomerDto customer) {
+    public void setCustomer(Customer customer) {
         this.customer = customer;
     }
 }

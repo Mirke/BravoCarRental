@@ -7,27 +7,31 @@ import java.util.List;
 
 import com.bravo.gruppbravowigellkoncernencarrental.entities.*;
 import com.bravo.gruppbravowigellkoncernencarrental.models.dto.*;
+import com.bravo.gruppbravowigellkoncernencarrental.services.CarService;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * <code>ObjectConverter</code> - Utility class for converting CarDto and
  * CustomerDto entities to Customer and Customer.
- * 
+ *
  * @authors Jessica
  * @version 0.0.1
  */
 
 public class ObjectMapper {
-
     // ############### Car ################//#
+
+
 
     public static CarDto ConvertToCarDto(Car entity) {
 
         CarDto dto = new CarDto();
         dto.setId(entity.getId());
-        dto.setCarSize(entity.getCarSize());
-        dto.setId(entity.getId());
         dto.setCostPerDay(entity.getCostPerDay());
         dto.setAvailable(entity.isAvailable());
+        dto.setRegistrationNumber(entity.getRegistrationNumber());
+        dto.setFactory(entity.getFactory());
+        dto.setModel(entity.getModel());
         return dto;
     }
 
@@ -37,10 +41,11 @@ public class ObjectMapper {
         for (Car entity : entities) {
             CarDto dto = new CarDto();
             dto.setId(entity.getId());
-            dto.setCarSize(entity.getCarSize());
-            dto.setId(entity.getId());
             dto.setCostPerDay(entity.getCostPerDay());
             dto.setAvailable(entity.isAvailable());
+            dto.setRegistrationNumber(entity.getRegistrationNumber());
+            dto.setFactory(entity.getFactory());
+            dto.setModel(entity.getModel());
             dtos.add(dto);
         }
         return dtos;
@@ -49,19 +54,23 @@ public class ObjectMapper {
     public static Car ConvertToCarEntity(CarDto dto) {
 
         Car entity = new Car();
-        entity.setCarSize(dto.getCarSize());
         entity.setId(dto.getId());
         entity.setCostPerDay(dto.getCostPerDay());
         entity.setAvailable(dto.isAvailable());
+        entity.setRegistrationNumber(dto.getRegistrationNumber());
+        entity.setFactory(dto.getFactory());
+        entity.setModel(dto.getModel());
         return entity;
     }
 
     public static Car ConvertToCarEntity(Car entity, CarDto dto) {
 
-        entity.setCarSize(dto.getCarSize());
         entity.setId(dto.getId());
         entity.setCostPerDay(dto.getCostPerDay());
         entity.setAvailable(dto.isAvailable());
+        entity.setRegistrationNumber(dto.getRegistrationNumber());
+        entity.setFactory(dto.getFactory());
+        entity.setModel(dto.getModel());
         return entity;
     }
 
@@ -99,7 +108,7 @@ public class ObjectMapper {
         }
         return dtos;
     }
-    
+
     public static Customer ConvertToCustomerEntity(CustomerDto dto) {
 
         Customer entity = new Customer();
@@ -136,8 +145,8 @@ public class ObjectMapper {
         dto.setOrderDate(entity.getOrderDate());
         dto.setBookedFrom(entity.getBookedFrom());
         dto.setReturnDate(entity.getReturnDate());
-        dto.setCar(ConvertToCarDto(entity.getCar()));
-        dto.setCustomer(ConvertToCustomerDto(entity.getCustomer()));
+        dto.setCar(entity.getCar());
+        dto.setCustomer(entity.getCustomer());
         return dto;
     }
 
@@ -150,21 +159,20 @@ public class ObjectMapper {
             dto.setOrderDate(entity.getOrderDate());
             dto.setBookedFrom(entity.getBookedFrom());
             dto.setReturnDate(entity.getReturnDate());
-            dto.setCar(ConvertToCarDto(entity.getCar()));
-            dto.setCustomer(ConvertToCustomerDto(entity.getCustomer()));
+            dto.setCar(entity.getCar());
+            dto.setCustomer(entity.getCustomer());
             dtos.add(dto);
         }
         return dtos;
     }
 
     public static Orders ConvertToOrderEntity(OrderDto dto) {
-
         Orders entity = new Orders();
         entity.setOrderDate(dto.getOrderDate());
         entity.setBookedFrom(dto.getBookedFrom());
         entity.setReturnDate(dto.getReturnDate());
-        entity.setCar(ConvertToCarEntity(dto.getCar()));
-        entity.setCustomer(ConvertToCustomerEntity(dto.getCustomer()));
+        entity.setCar(dto.getCar());
+        entity.setCustomer(dto.getCustomer());
         return entity;
     }
 
@@ -173,8 +181,8 @@ public class ObjectMapper {
         entity.setOrderDate(dto.getOrderDate());
         entity.setBookedFrom(dto.getBookedFrom());
         entity.setReturnDate(dto.getReturnDate());
-        entity.setCar(ConvertToCarEntity(dto.getCar()));
-        entity.setCustomer(ConvertToCustomerEntity(dto.getCustomer()));
+        entity.setCar(dto.getCar());
+        entity.setCustomer(dto.getCustomer());
         return entity;
     }
 }

@@ -8,7 +8,7 @@ import java.util.Date;
 
 /**
  * * <code>Order</code> - Order Entity
- * @Authors Nicolina Larsson, Karin (Created)
+ * @Authors Nicolina Larsson (Created) / Karin (Created)
  * @version 0.0.1
  * */
 
