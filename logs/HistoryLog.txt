@@ -1,0 +1,9 @@
+Customer Ellen ordered car Volvo XC90
+Customer Ellen canceled order id 4
+Admin added new customer Patrik2 Lugn
+Admin updated customer Patrik Lugn to Patrik11 Lugn
+Admin deleted customer Patrik11 Lugn
+Admin added new car Volvo XC100
+Admin updated car Volvo to Volvo
+Admin deleted car Volvo XC90
+Admin deleted order id: 4
