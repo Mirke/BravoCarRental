@@ -167,7 +167,13 @@ public class AdminController {
 
 
     @DeleteMapping("api/v1/deleteorder")
-    public void deleteOrder(@RequestBody Orders orders){
-        orderService.removeOrder(orders.getId());
+    public ResponseEntity<String> deleteOrder(@RequestBody Orders orders){
+        Optional<Orders> ordersItem = iOrderRepository.findById(orders.getId());
+        if(ordersItem.isPresent()){
+            logger.info("Admin deleted order id: " + ordersItem.get().getId());
+            orderService.removeOrder(orders.getId());
+            return new ResponseEntity<>("Deleted order!", HttpStatus.OK);
+        }
+        return new ResponseEntity<>("Could not delete orderId: " + orders.getId(),HttpStatus.NOT_FOUND);
     }
 }
