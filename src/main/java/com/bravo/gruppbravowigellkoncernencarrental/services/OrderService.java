@@ -3,9 +3,8 @@ package com.bravo.gruppbravowigellkoncernencarrental.services;
 import com.bravo.gruppbravowigellkoncernencarrental.entities.Orders;
 import com.bravo.gruppbravowigellkoncernencarrental.models.dto.OrderDto;
 import com.bravo.gruppbravowigellkoncernencarrental.repositories.IOrderRepository;
-import com.bravo.gruppbravowigellkoncernencarrental.utilities.ObjectConverter;
+import com.bravo.gruppbravowigellkoncernencarrental.utilities.ObjectMapper;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -13,7 +12,7 @@ import java.util.List;
 
 /**
  * <code>OrdersService</code> - Service methods (CRUD) for manipulating Orders
- * @authors Mikael Eriksson (mikael.eriksson@edu.edugrade.se)
+ * @authors Mikael Eriksson (mikael.eriksson@edu.edugrade.se) Jessica lloyd (jessica.lloyd@edu.edugrade.se)
  * @version 0.0.1
  */
 
@@ -47,14 +46,14 @@ public class OrderService implements IOrderService {
 
     @Override
     public void addOrder(OrderDto dto) {
-        Orders order = ObjectConverter.ConvertToOrderEntity(dto);
+        Orders order = ObjectMapper.ConvertToOrderEntity(dto);
         orderRepository.save(order);
     }
 
     @Override
     public void updateOrder(Long id, OrderDto dto) {
        orderRepository.save(
-        ObjectConverter.ConvertToOrderEntity(
+        ObjectMapper.ConvertToOrderEntity(
             orderRepository.findById(id).get(), dto));
 
     }

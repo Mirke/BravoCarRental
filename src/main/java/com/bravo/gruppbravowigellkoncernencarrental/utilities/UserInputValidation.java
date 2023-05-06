@@ -5,7 +5,9 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.bravo.gruppbravowigellkoncernencarrental.entities.Customer;
 import com.bravo.gruppbravowigellkoncernencarrental.models.dto.CustomerDto;
+import com.bravo.gruppbravowigellkoncernencarrental.rules.enums.ValidationRules;
 
 /**
  * <code>UserInputValidation</code> - Class for validating input
@@ -16,180 +18,123 @@ import com.bravo.gruppbravowigellkoncernencarrental.models.dto.CustomerDto;
 
 public class UserInputValidation {
 
+    protected static Integer parseIntOrNull(String value) {
+        try {
+            return Integer.parseInt(value);
+        } catch (NumberFormatException e) {
+            return null;
+        }
+    }
+
     public class CustomerValidation {
 
-        public List<String> CustomerFieldValidation(CustomerDto dto){
+        public List<String> CustomerFieldValidation(CustomerDto dto) {
 
             List<String> messages = new ArrayList<>();
-           firstNameValidation(dto.getFirstName(), messages);
-           lastNameValidation(dto.getLastName(), messages);
+            messages = Validation(dto, messages);
 
             return messages;
         }
 
-        private List<String> firstNameValidation(String firstname, List<String> messages) {
+        private boolean LenghtValidation(int rule, String stringValue) {
 
-            if (firstname == null
-                    || firstname.isEmpty()
-                    || firstname.trim().isEmpty()
-                    || firstname.length() > 30) {
-                        messages.add(""); 
+            boolean isValid = true;
+            if (stringValue == null
+                    || stringValue.isEmpty()
+                    || stringValue.trim().isEmpty()
+                    || stringValue.length() > rule) {
+                isValid = false;
+            }
+            return isValid;
+        }
+
+        private boolean contentValidation(int rule, String stringValue) {
+            boolean isValid = false;
+            Pattern pattern = null;
+            // Character not allowed filter
+            if (ValidationRules.TYPE_NAME.getValue() == rule) {
+                pattern = Pattern.compile("[^a-zA-Z]");
+            } else if (ValidationRules.TYPE_ADDRESS.getValue() == rule) {
+                pattern = Pattern.compile("[^a-zA-Z0-9]");
+            } else if (ValidationRules.TYPE_CITY.getValue() == rule) {
+                pattern = Pattern.compile("[^a-zA-Z]");
+            } else if (ValidationRules.TYPE_EMAIL.getValue() == rule) {
+
+            } else if (ValidationRules.TYPE_PHONE.getValue() == rule) {
+                pattern = Pattern.compile("[^0-9]");
+            } else if (ValidationRules.TYPE_POSTAL_CODE.getValue() == rule) {
+                pattern = Pattern.compile("[^0-9]");
             }
 
-            // Character not allowed filter
-            // Pattern pattern = Pattern.compile("[^a-zA-Z]");
-            // Matcher match = pattern.matcher(firstname);
-            // boolean hasMatch = match.find();
-            // if(hasMatch){
-            //     messages.add(""); 
-            // }
-
-            return messages;
+            Matcher match = pattern.matcher(stringValue);
+            boolean hasMatch = match.find();
+            if (!hasMatch) {
+                isValid = true;
+            }
+            return isValid;
         }
-        
-        private List<String> lastNameValidation(String lastname, List<String> messages) {
 
-            if (lastname == null
-                    || lastname.isEmpty()
-                    || lastname.trim().isEmpty()
-                    || lastname.length() > 30) {
-                messages.add(""); 
+        private List<String> Validation(CustomerDto dto, List<String> messages) {
+
+            if (LenghtValidation(ValidationRules.FIRST_NAME_LENGHT.getValue(), dto.getFirstName())) {
+                if (!contentValidation(ValidationRules.TYPE_NAME.getValue(), dto.getFirstName())) {
+                    messages.add(UserMessages.customerFirstNameLenghtAlowedCharacters);
+                }
+            } else {
+                messages.add(UserMessages.customerFirstNameAlowedLenght);
             }
 
-            // Character not allowed filter
-            // Pattern pattern = Pattern.compile("[^a-zA-Z]");
-            // Matcher match = pattern.matcher(lastname);
-            // boolean hasMatch = match.find();
-            // if(hasMatch){
-            //    messages.add("");
-            // }
+            if (LenghtValidation(ValidationRules.LAST_NAME_LENGHT.getValue(), dto.getLastName())) {
+                if (!contentValidation(ValidationRules.TYPE_NAME.getValue(), dto.getLastName())) {
+                    messages.add("null");
+                }
+            } else {
+                messages.add("null");
+            }
+
+            if (LenghtValidation(ValidationRules.STREET_ADDRESS_LENGHT.getValue(), dto.getStreetAddress())) {
+                if (!contentValidation(ValidationRules.TYPE_ADDRESS.getValue(), dto.getStreetAddress())) {
+                    messages.add("null");
+                }
+            } else {
+                messages.add("null");
+            }
+
+            if (LenghtValidation(ValidationRules.POST_CODE_LENGHT.getValue(), Integer.toString(dto.getPostalCode()))) {
+                if (!contentValidation(ValidationRules.TYPE_POSTAL_CODE.getValue(),
+                        Integer.toString(dto.getPostalCode()))) {
+                    messages.add("null");
+                }
+            } else {
+                messages.add("null");
+            }
+
+            if (LenghtValidation(ValidationRules.CITY_LENGHT.getValue(), dto.getCity())) {
+                if (!contentValidation(ValidationRules.TYPE_CITY.getValue(), dto.getCity())) {
+                    messages.add("null");
+                }
+            } else {
+                messages.add("null");
+            }
+
+            if (LenghtValidation(ValidationRules.EMAIL_LENGHT.getValue(), dto.getEmail())) {
+                if (!contentValidation(ValidationRules.TYPE_EMAIL.getValue(), dto.getEmail())) {
+                    messages.add("null");
+                }
+            } else {
+                messages.add("null");
+            }
+
+            if (LenghtValidation(ValidationRules.PHONE_NUMBER_LENGHT.getValue(), Integer.toString(dto.getPhone()))) {
+                if (!contentValidation(ValidationRules.TYPE_EMAIL.getValue(), Integer.toString(dto.getPhone()))) {
+                    messages.add("null");
+                }
+            } else {
+                messages.add("null");
+            }
+
             return messages;
         }
-
-        // private List<String> streetAddressValidation(String streetAddress) {
-
-        //     if (streetAddress == null
-        //             || streetAddress.isEmpty()
-        //             || streetAddress.trim().isEmpty()
-        //             || streetAddress.length() > 30) {
-        //         isValid = false;
-        //     }else{
-        //         isValid = true;
-        //     }
-
-        //     // Character not allowed filter
-        //     // Pattern pattern = Pattern.compile("[^a-zA-Z0-9]");
-        //     // Matcher match = pattern.matcher(streetAddress);
-        //     // boolean hasMatch = match.find();
-        //     // if(hasMatch){
-        //     //     isValid = false;
-        //     // }else{
-        //     //     isValid = true;
-        //     // }
-
-        //     return isValid;
-        // }
-
-        // private List<String> postalCodeValidation(String postalCode) {
-
-        //     Boolean isValid = false;
-        //     if (postalCode == null
-        //             || postalCode.isEmpty()
-        //             || postalCode.trim().isEmpty()
-        //             || postalCode.length() > 6) {
-        //         isValid = false;
-        //     }else{
-        //         isValid = true;
-        //     } 
-
-        //     // Character not allowed filter
-        //     // Pattern pattern = Pattern.compile("[^0-9]");
-        //     // Matcher match = pattern.matcher(streetAddress);
-        //     // boolean hasMatch = match.find();
-        //     // if(hasMatch){
-        //     //     isValid = false;
-        //     // }else{
-        //     //     isValid = true;
-        //     // }
-
-        //     return isValid;
-        // }
-
-        // private List<String> cityValidation(String city) {
-
-        //     Boolean isValid = false;
-        //     if (city == null
-        //             || city.isEmpty()
-        //             || city.trim().isEmpty()
-        //             || city.length() > 30) {
-        //         isValid = false;
-        //     }else{
-        //         isValid = true;
-        //     } 
-
-        //     // Character not allowed filter
-        //     // Pattern pattern = Pattern.compile("[^a-zA-Z0-9]");
-        //     // Matcher match = pattern.matcher(city);
-        //     // boolean hasMatch = match.find();
-        //     // if(hasMatch){
-        //     //     isValid = false;
-        //     // }else{
-        //     //     isValid = true;
-        //     // }
-
-        //     return isValid;
-        // }
-
-        // private List<String> emailValidation(String email) {
-
-        //     Boolean isValid = false;
-        //     if (email == null
-        //             || email.isEmpty()
-        //             || email.trim().isEmpty()
-        //             || email.length() > 45) {
-        //         isValid = false;
-        //     }else{
-        //         isValid = true;
-        //     } 
-
-        //     // Character not allowed filter
-        //     // Pattern pattern = Pattern.compile("[^a-zA-Z0-9]");
-        //     // Matcher match = pattern.matcher(city);
-        //     // boolean hasMatch = match.find();
-        //     // if(hasMatch){
-        //     //     isValid = false;
-        //     // }else{
-        //     //     isValid = true;
-        //     // }
-
-        //     return isValid;
-        // }
-
-        // private String phoneValidation(String phone) {
-
-        //     Boolean isValid = false;
-        //     if (phone == null
-        //             || phone.isEmpty()
-        //             || phone.trim().isEmpty()
-        //             || phone.length() > 12) {
-        //         isValid = false;
-        //     }else{
-        //         isValid = true;
-        //     } 
-
-        //     // Character not allowed filter
-        //     // Pattern pattern = Pattern.compile("[^0-9]");
-        //     // Matcher match = pattern.matcher(city);
-        //     // boolean hasMatch = match.find();
-        //     // if(hasMatch){
-        //     //     isValid = false;
-        //     // }else{
-        //     //     isValid = true;
-        //     // }
-
-        //     return isValid;
-        // }
-
-
     }
+
 }
