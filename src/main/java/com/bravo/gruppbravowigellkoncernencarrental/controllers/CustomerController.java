@@ -7,10 +7,10 @@ import com.bravo.gruppbravowigellkoncernencarrental.models.dto.CarDto;
 import com.bravo.gruppbravowigellkoncernencarrental.models.dto.CustomerDto;
 import com.bravo.gruppbravowigellkoncernencarrental.repositories.ICarRepository;
 import com.bravo.gruppbravowigellkoncernencarrental.repositories.ICustomerRepository;
-import com.bravo.gruppbravowigellkoncernencarrental.repositories.IOrdersRepository;
+import com.bravo.gruppbravowigellkoncernencarrental.repositories.IOrderRepository;
 import com.bravo.gruppbravowigellkoncernencarrental.services.CarService;
 import com.bravo.gruppbravowigellkoncernencarrental.services.CustomerService;
-import com.bravo.gruppbravowigellkoncernencarrental.services.OrdersService;
+import com.bravo.gruppbravowigellkoncernencarrental.services.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,18 +30,18 @@ import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
 @RestController
 public class CustomerController {
     @Autowired
-    private OrdersService ordersService;
+    private OrderService orderService;
     @Autowired
     private CarService carService;
     @Autowired
-    private IOrdersRepository iOrdersRepository;
+    private IOrderRepository iOrderRepository;
     @Autowired
     private ICarRepository iCarRepository;
 
 
     @GetMapping("api/v1/myOrders")
     public List<Orders> getOrders(){
-        return ordersService.getAllOrders();
+        return orderService.getAllOrders();
 }
 
     @GetMapping("api/v1/allCars")

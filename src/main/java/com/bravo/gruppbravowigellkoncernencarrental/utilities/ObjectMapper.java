@@ -3,24 +3,28 @@ package com.bravo.gruppbravowigellkoncernencarrental.utilities;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.http.PushBuilder;
+// import javax.servlet.http.PushBuilder;
 
 import com.bravo.gruppbravowigellkoncernencarrental.entities.*;
 import com.bravo.gruppbravowigellkoncernencarrental.models.dto.*;
 
 /**
- * <code>ObjectConverter</code> - Utility class for converting CarDto and CustomerDto entities to Customer and Customer.
+ * <code>ObjectConverter</code> - Utility class for converting CarDto and
+ * CustomerDto entities to Customer and Customer.
+ *
  * @authors Jessica
  * @version 0.0.1
  */
 
-public class ObjectConverter {
+public class ObjectMapper {
 
     // ############### Car ################//#
 
     public static CarDto ConvertToCarDto(Car entity) {
 
         CarDto dto = new CarDto();
+        dto.setId(entity.getId());
+        dto.setCarSize(entity.getCarSize());
         dto.setId(entity.getId());
         dto.setCostPerDay(entity.getCostPerDay());
         dto.setAvailable(entity.isAvailable());
@@ -30,11 +34,13 @@ public class ObjectConverter {
         return dto;
     }
 
-    public static List<CarDto> ConvertToCarDto(List<Car> entities) {
+    public static List<CarDto> ConvertToCarDtos(List<Car> entities) {
 
         List<CarDto> dtos = new ArrayList<>();
         for (Car entity : entities) {
             CarDto dto = new CarDto();
+            dto.setId(entity.getId());
+            dto.setCarSize(entity.getCarSize());
             dto.setId(entity.getId());
             dto.setCostPerDay(entity.getCostPerDay());
             dto.setAvailable(entity.isAvailable());
@@ -86,7 +92,7 @@ public class ObjectConverter {
         return dto;
     }
 
-    public static List<CustomerDto> ConvertToCustomerDto(List<Customer> entities) {
+    public static List<CustomerDto> ConvertToCustomerDtos(List<Customer> entities) {
 
         List<CustomerDto> dtos = new ArrayList<>();
         for (Customer entity : entities) {
@@ -103,7 +109,6 @@ public class ObjectConverter {
         }
         return dtos;
     }
-
 
     public static Customer ConvertToCustomerEntity(CustomerDto dto) {
 
@@ -132,4 +137,54 @@ public class ObjectConverter {
         return entity;
     }
 
+    // ############### Order ################//#
+
+    public static OrderDto ConvertToOrderDto(Orders entity) {
+
+        OrderDto dto = new OrderDto();
+        dto.setId(entity.getId());
+        dto.setOrderDate(entity.getOrderDate());
+        dto.setBookedFrom(entity.getBookedFrom());
+        dto.setReturnDate(entity.getReturnDate());
+        dto.setCar(ConvertToCarDto(entity.getCar()));
+        dto.setCustomer(ConvertToCustomerDto(entity.getCustomer()));
+        return dto;
+    }
+
+    public static List<OrderDto> ConvertToOrderDtos(List<Orders> entities) {
+
+        List<OrderDto> dtos = new ArrayList<>();
+        for (Orders entity : entities) {
+            OrderDto dto = new OrderDto();
+            dto.setId(entity.getId());
+            dto.setOrderDate(entity.getOrderDate());
+            dto.setBookedFrom(entity.getBookedFrom());
+            dto.setReturnDate(entity.getReturnDate());
+            dto.setCar(ConvertToCarDto(entity.getCar()));
+            dto.setCustomer(ConvertToCustomerDto(entity.getCustomer()));
+            dtos.add(dto);
+        }
+        return dtos;
+    }
+
+    public static Orders ConvertToOrderEntity(OrderDto dto) {
+
+        Orders entity = new Orders();
+        entity.setOrderDate(dto.getOrderDate());
+        entity.setBookedFrom(dto.getBookedFrom());
+        entity.setReturnDate(dto.getReturnDate());
+        entity.setCar(ConvertToCarEntity(dto.getCar()));
+        entity.setCustomer(ConvertToCustomerEntity(dto.getCustomer()));
+        return entity;
+    }
+
+    public static Orders ConvertToOrderEntity(Orders entity, OrderDto dto) {
+
+        entity.setOrderDate(dto.getOrderDate());
+        entity.setBookedFrom(dto.getBookedFrom());
+        entity.setReturnDate(dto.getReturnDate());
+        entity.setCar(ConvertToCarEntity(dto.getCar()));
+        entity.setCustomer(ConvertToCustomerEntity(dto.getCustomer()));
+        return entity;
+    }
 }
