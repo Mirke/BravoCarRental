@@ -1,0 +1,97 @@
+ADMIN POSTMAN
+
+localhost:9090/api/v1/addcustomer
+POST 
+    {
+        "firstName": "Patrik2",
+        "lastName": "Lugn",
+        "streetAddress": "Sveavägen 99",
+        "postalCode": 82221,
+        "city": "Ockelbo",
+        "email": "lugnochro@gmail.com",
+        "phone": 705645654
+    }
+
+localhost:9090/api/v1/customers
+GET
+
+localhost:9090/api/v1/updatecustomer
+PUT
+{
+    "id": 5,
+    "firstName": "Patrik11",
+    "lastName": "Lugn",
+    "streetAddress": "Sveavägen 99",
+    "postalCode": 82221,
+    "city": "Ockelbo",
+    "email": "lugnochro@gmail.com",
+    "phone": 705645654
+}
+
+localhost:9090/api/v1/deletecustomer
+DELETE
+{"id":4}
+
+localhost:9090/api/v1/addcar
+POST
+    {
+        "factory":"Volvo",
+        "model":"XC100",
+        "costPerDay": 1249,
+        "registrationNumber": "PPP999",
+        "available": true
+    }
+
+localhost:9090/api/v1/allcars
+GET
+
+localhost:9090/api/v1/updatecar
+PUT
+    {
+        "id": 5,
+        "factory":"Volvo",
+        "model":"XC100",
+        "costPerDay": 1249,
+        "registrationNumber": "XXX999",
+        "available": true
+    }
+
+localhost:9090/api/v1/deletecar
+DELETE
+{"id":4}
+
+localhost:9090/api/v1/orders
+GET
+
+localhost:9090/api/v1/deleteorder
+DELETE
+{"id":2}
+
+CUSTOMER POSTMAN
+
+localhost:9090/api/v1/cars
+GET
+
+localhost:9090/api/v1/ordercar
+POST
+{
+    "orderDate":"1992-09-09",
+    "bookedFrom": "1988-09-10",
+    "returnDate":"1988-10-10",
+    "car":     {
+        "id": 5
+    },
+    "customer":     {
+        "id": 5
+    }
+    }
+
+localhost:9090/api/v1/cancelorder
+PUT
+    {
+        "id": 3
+    }
+
+localhost:9090/api/v1/myorders
+GET
+{"id":4}
