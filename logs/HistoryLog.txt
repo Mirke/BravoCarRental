@@ -20,3 +20,4 @@ Admin deleted car Volvo XC90
 Admin added new car Volvo XC100
 Admin updated car Volvo to Volvo
 Admin deleted car Volvo XC90
+Admin deleted order id: 1

@@ -19,6 +19,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface IOrderRepository extends CrudRepository<Orders, Long> {
 
-    @Query("SELECT o FROM Orders o WHERE o.customer = :customerId")
+    @Query("SELECT o FROM Orders o WHERE o.customer.id = :customerId")
     List<Orders> getCustomerOrders(@Param("customerId") Long customerId);
 }

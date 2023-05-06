@@ -39,15 +39,17 @@ public class CustomerController {
     private ICarRepository iCarRepository;
 
 
-    @GetMapping("api/v1/myOrders")
-    public List<Orders> getOrders(){
-        return orderService.getAllOrders();
+    @GetMapping("api/v1/myorders")
+    public List<Orders> getOrders(@RequestBody Customer customer){
+        return orderService.getCustomerOrders(customer.getId());
 }
 
-    @GetMapping("api/v1/allCars")
-    public List<Car> getCars(){
-        return carService.getCars();
+    @GetMapping("api/v1/cars")
+    public List<Car> getCars() {
+        return carService.getAvaliableCars();
     }
+
+
 
 
     //Methods to order a car, cancel an order are marked out since its repos+service aren't fully done yet
