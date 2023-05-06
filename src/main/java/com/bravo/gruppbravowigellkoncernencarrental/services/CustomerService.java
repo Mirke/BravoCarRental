@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import com.bravo.gruppbravowigellkoncernencarrental.entities.Customer;
 import com.bravo.gruppbravowigellkoncernencarrental.models.dto.CustomerDto;
 import com.bravo.gruppbravowigellkoncernencarrental.repositories.ICustomerRepository;
-import com.bravo.gruppbravowigellkoncernencarrental.utilities.ObjectConverter;
+import com.bravo.gruppbravowigellkoncernencarrental.utilities.ObjectMapper;
 
 /**
  * <code>CustomerService</code> - Service methods for customer entities
@@ -26,7 +26,7 @@ public class CustomerService implements ICustomerService {
 
     @Override
     public void addCustomer(CustomerDto dto) {
-        customerRepository.save(ObjectConverter.ConvertToCustomerEntity(dto));
+        customerRepository.save(ObjectMapper.ConvertToCustomerEntity(dto));
     }
 
     @Override
@@ -38,13 +38,13 @@ public class CustomerService implements ICustomerService {
 
     @Override
     public CustomerDto getCustomer(Long id) {
-        return ObjectConverter.ConvertToCustomerDto(customerRepository.findById(id).get());
+        return ObjectMapper.ConvertToCustomerDto(customerRepository.findById(id).get());
     }
 
     @Override
     public void updateCustomer(CustomerDto dto) {
         Customer customer = customerRepository.findById(dto.getId()).get();
-        customerRepository.save(ObjectConverter.ConvertToCustomerEntity(customer, dto));
+        customerRepository.save(ObjectMapper.ConvertToCustomerEntity(customer, dto));
     }
 
     @Override

@@ -26,7 +26,4 @@ public interface ICarRepository extends CrudRepository<Car, Long> {
 
     @Query("SELECT c FROM Car c WHERE c.costPerDay = :costPerDay")
     List<Car> getCostPerDayCars(@Param("costPerDay") Integer costPerDay);
-
-    @Query("SELECT c FROM Car c WHERE c.carSize = :carSize")
-    List<Car> getCarSize(@Param("carSize") String carSize);
 }

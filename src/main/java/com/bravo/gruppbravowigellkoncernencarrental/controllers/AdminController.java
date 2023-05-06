@@ -165,12 +165,9 @@ public class AdminController {
         return orderService.getAllOrders();
     }
 
-    // TODO - Remove an order, which are made by customers
-    // TODO - Needs to log when admin deletes an order
-    /*
-    @GetMapping("api/v1/deleteorder")
-    public List<Orders> deleteOrder(Long id){
-        return ordersService.removeOrder(id);
+
+    @DeleteMapping("api/v1/deleteorder")
+    public void deleteOrder(@RequestBody Orders orders){
+        orderService.removeOrder(orders.getId());
     }
-    */
 }

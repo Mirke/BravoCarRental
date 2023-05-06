@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import com.bravo.gruppbravowigellkoncernencarrental.entities.Car;
 import com.bravo.gruppbravowigellkoncernencarrental.models.dto.CarDto;
 import com.bravo.gruppbravowigellkoncernencarrental.repositories.ICarRepository;
-import com.bravo.gruppbravowigellkoncernencarrental.utilities.ObjectConverter;
+import com.bravo.gruppbravowigellkoncernencarrental.utilities.ObjectMapper;
 
 /**
  * <code>CarService</code> - Service methods for car entities
@@ -26,7 +26,7 @@ public class CarService implements ICarService {
 
     @Override
     public void addCar(CarDto dto) {
-        carRepository.save(ObjectConverter.ConvertToCarEntity(dto));
+        carRepository.save(ObjectMapper.ConvertToCarEntity(dto));
     }
 
     @Override
@@ -38,13 +38,13 @@ public class CarService implements ICarService {
 
     @Override
     public CarDto getCar(Long id) {
-        return ObjectConverter.ConvertToCarDto(carRepository.findById(id).get());
+        return ObjectMapper.ConvertToCarDto(carRepository.findById(id).get());
     }
 
     @Override
     public void updateCar(CarDto dto) {
         Car car = carRepository.findById(dto.getId()).get();
-        carRepository.save(ObjectConverter.ConvertToCarEntity(car, dto));
+        carRepository.save(ObjectMapper.ConvertToCarEntity(car, dto));
     }
 
     @Override

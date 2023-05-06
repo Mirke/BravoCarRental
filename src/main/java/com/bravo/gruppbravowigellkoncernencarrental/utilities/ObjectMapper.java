@@ -24,8 +24,6 @@ public class ObjectMapper {
 
         CarDto dto = new CarDto();
         dto.setId(entity.getId());
-        dto.setCarSize(entity.getCarSize());
-        dto.setId(entity.getId());
         dto.setCostPerDay(entity.getCostPerDay());
         dto.setAvailable(entity.isAvailable());
         dto.setRegistrationNumber(entity.getRegistrationNumber());
@@ -39,8 +37,6 @@ public class ObjectMapper {
         List<CarDto> dtos = new ArrayList<>();
         for (Car entity : entities) {
             CarDto dto = new CarDto();
-            dto.setId(entity.getId());
-            dto.setCarSize(entity.getCarSize());
             dto.setId(entity.getId());
             dto.setCostPerDay(entity.getCostPerDay());
             dto.setAvailable(entity.isAvailable());

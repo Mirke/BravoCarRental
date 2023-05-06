@@ -12,13 +12,13 @@ import org.springframework.stereotype.Repository;
 /**
  * <code>IOrdersRepository</code> - CRUD repository for Orders entities
  * 
- * @authors Mikael Eriksson
+ * @authors Jessica (Creator), Nicolina (Creator)
  * @version 0.0.1
  */
 
 @Repository
 public interface IOrderRepository extends CrudRepository<Orders, Long> {
 
-    @Query("SELECT o FROM Orders o WHERE o.CustomerId = :costumerId")
-    List<Orders> getCustomerOrders(@Param("costumerId") Long costumerId);
+    @Query("SELECT o FROM Orders o WHERE o.customer = :customerId")
+    List<Orders> getCustomerOrders(@Param("customerId") Long customerId);
 }
