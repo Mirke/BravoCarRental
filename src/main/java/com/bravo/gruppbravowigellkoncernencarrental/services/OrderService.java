@@ -1,9 +1,17 @@
 package com.bravo.gruppbravowigellkoncernencarrental.services;
 
+import com.bravo.gruppbravowigellkoncernencarrental.controllers.CustomerController;
+import com.bravo.gruppbravowigellkoncernencarrental.entities.Car;
+import com.bravo.gruppbravowigellkoncernencarrental.entities.Customer;
 import com.bravo.gruppbravowigellkoncernencarrental.entities.Orders;
 import com.bravo.gruppbravowigellkoncernencarrental.models.dto.OrderDto;
+import com.bravo.gruppbravowigellkoncernencarrental.repositories.ICarRepository;
+import com.bravo.gruppbravowigellkoncernencarrental.repositories.ICustomerRepository;
 import com.bravo.gruppbravowigellkoncernencarrental.repositories.IOrderRepository;
 import com.bravo.gruppbravowigellkoncernencarrental.utilities.ObjectMapper;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +25,16 @@ import java.util.List;
 @Service
 public class OrderService implements IOrderService {
 
+    @Autowired
     IOrderRepository orderRepository;
+
+    @Autowired
+    ICarRepository iCarRepository;
+
+    @Autowired
+    ICustomerRepository iCustomerRepository;
+
+    private static final Logger logger = LogManager.getLogger(OrderService.class);
 
     public OrderService(IOrderRepository orderRepository){
         this.orderRepository = orderRepository;
@@ -45,6 +62,11 @@ public class OrderService implements IOrderService {
     @Override
     public void addOrder(OrderDto dto) {
         Orders order = ObjectMapper.ConvertToOrderEntity(dto);
+        Car car = iCarRepository.findById(order.getCar().getId()).get();
+        Customer customer = iCustomerRepository.findById(order.getCustomer().getId()).get();
+        car.setAvailable(false);
+        order.setCar(car);
+        logger.info("Customer "+ customer.getFirstName() + " ordered car " + order.getCar().getFactory() + " " + order.getCar().getModel());
         orderRepository.save(order);
     }
 
@@ -56,10 +78,15 @@ public class OrderService implements IOrderService {
 
     }
 
-    // TODO - Method for when a Customer decides to cancel and order
     @Override
-    // TODO - We need to add a flag-property to identify if the order is active or not. this method is based on that prop. 
-    public void cancelOrder(Long id) {
+    public void cancelOrder(OrderDto dto) {
+        Orders orders1 = orderRepository.findById(dto.getId()).get();
+        orders1.getCar().setAvailable(true);
+
+        orders1.setCar(null);
+        orders1.setCustomer(null);
+
+        orderRepository.save(orders1);
 
     }
 

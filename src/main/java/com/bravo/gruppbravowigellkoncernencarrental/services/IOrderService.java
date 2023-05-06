@@ -17,7 +17,7 @@ public interface IOrderService {
     List<Orders> getCustomerOrders(Long id);
     void addOrder(OrderDto dto);
     void updateOrder(Long id,OrderDto dto);
-    void cancelOrder(Long id);
+    void cancelOrder(OrderDto dto);
     void removeOrder(Long id);
     Orders getCustomerOrder(Long id);
 }
