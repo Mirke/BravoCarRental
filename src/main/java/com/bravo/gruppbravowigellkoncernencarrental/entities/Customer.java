@@ -1,5 +1,7 @@
 package com.bravo.gruppbravowigellkoncernencarrental.entities;
 
+import com.bravo.gruppbravowigellkoncernencarrental.models.dto.CustomerDto;
+
 import javax.persistence.*;
 
 /**
@@ -16,7 +18,7 @@ public class Customer {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    public Long getId() {
+    public CustomerDto getId() {
         return id;
     }
 

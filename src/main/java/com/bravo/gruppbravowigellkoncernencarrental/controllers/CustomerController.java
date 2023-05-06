@@ -5,6 +5,7 @@ import com.bravo.gruppbravowigellkoncernencarrental.entities.Customer;
 import com.bravo.gruppbravowigellkoncernencarrental.entities.Orders;
 import com.bravo.gruppbravowigellkoncernencarrental.models.dto.CarDto;
 import com.bravo.gruppbravowigellkoncernencarrental.models.dto.CustomerDto;
+import com.bravo.gruppbravowigellkoncernencarrental.models.dto.OrderDto;
 import com.bravo.gruppbravowigellkoncernencarrental.repositories.ICarRepository;
 import com.bravo.gruppbravowigellkoncernencarrental.repositories.ICustomerRepository;
 import com.bravo.gruppbravowigellkoncernencarrental.repositories.IOrderRepository;
@@ -49,19 +50,16 @@ public class CustomerController {
         return carService.getCars();
     }
 
-
-    //Methods to order a car, cancel an order are marked out since its repos+service aren't fully done yet
-
-    /*
     @PostMapping("api/v1/orderCar")
-    public ResponseEntity<Orders> orderCar(@RequestBody Order order){
-        ordersService.addOrder(order);
+    public ResponseEntity<Orders> orderCar(@RequestBody Orders order){
+        orderService.addOrder(new OrderDto());
         System.out.println("A car was successfully ordered");
         return new ResponseEntity<>(order, HttpStatus.CREATED);
-    }*/
-  /*  @PutMapping("/admin/cancelOrder")
-    public ResponseEntity<Orders> cancelOrder(@RequestBody Order order){
-        return ResponseEntity.ok(ordersService.cancelOrder(order, ID););
-    }*/
+    }
+
+   @PutMapping("/admin/cancelOrder")
+    public ResponseEntity<Orders> removeOrder(@RequestBody Orders order){
+        return ResponseEntity.ok(orderService.removeOrder(order, id));
+    }
 
 }
