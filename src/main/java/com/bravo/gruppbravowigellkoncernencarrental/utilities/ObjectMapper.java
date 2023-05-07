@@ -7,8 +7,6 @@ import java.util.List;
 
 import com.bravo.gruppbravowigellkoncernencarrental.entities.*;
 import com.bravo.gruppbravowigellkoncernencarrental.models.dto.*;
-import com.bravo.gruppbravowigellkoncernencarrental.services.CarService;
-import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * <code>ObjectConverter</code> - Utility class for converting CarDto and

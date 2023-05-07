@@ -12,10 +12,10 @@ import com.bravo.gruppbravowigellkoncernencarrental.models.dto.CarDto;
 
 public interface ICarService {
     
-    void addCar(CarDto dto);
-    List<Car> getCars();
+    boolean addCar(CarDto dto);
+    List<CarDto> getCars();
     CarDto getCar(Long id);
-    void updateCar(CarDto dto);
-    void removeCar(Long id);
+    boolean updateCar(CarDto dto);
+    boolean removeCar(Long id);
     List<Car> getAvaliableCars();
 }

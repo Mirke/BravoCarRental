@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.bravo.gruppbravowigellkoncernencarrental.entities.Customer;
 import com.bravo.gruppbravowigellkoncernencarrental.models.dto.CustomerDto;
 import com.bravo.gruppbravowigellkoncernencarrental.rules.enums.ValidationRules;
 

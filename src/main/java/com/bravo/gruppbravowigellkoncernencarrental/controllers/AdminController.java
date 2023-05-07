@@ -6,6 +6,7 @@ import com.bravo.gruppbravowigellkoncernencarrental.entities.Customer;
 import com.bravo.gruppbravowigellkoncernencarrental.entities.Orders;
 import com.bravo.gruppbravowigellkoncernencarrental.models.dto.CarDto;
 import com.bravo.gruppbravowigellkoncernencarrental.models.dto.CustomerDto;
+import com.bravo.gruppbravowigellkoncernencarrental.models.dto.OrderDto;
 import com.bravo.gruppbravowigellkoncernencarrental.repositories.ICarRepository;
 import com.bravo.gruppbravowigellkoncernencarrental.repositories.ICustomerRepository;
 import com.bravo.gruppbravowigellkoncernencarrental.repositories.IOrderRepository;
@@ -24,7 +25,10 @@ import java.util.Optional;
 
 /**
  * <code>AdminController</code> - CRUD commands for admin
- * @authors Mikael Eriksson (mikael.eriksson@edu.edugrade.se) (Creator and create Loggers) / Jean Kadahizi (jean.kadahizi@edu.edugrade.se) (Editor)
+ * 
+ * @authors Mikael Eriksson (mikael.eriksson@edu.edugrade.se) (Creator and
+ *          create Loggers) / Jean Kadahizi (jean.kadahizi@edu.edugrade.se)
+ *          (Editor)
  * @version 0.0.1
  */
 
@@ -32,148 +36,132 @@ import java.util.Optional;
 public class AdminController {
 
     // -----------------------------------------------------------------------------------------------------------------
-    //   Properties
+    // Properties
     // -----------------------------------------------------------------------------------------------------------------
 
     @Autowired
     private CarService carService;
     @Autowired
-    ICustomerRepository customerRepository;
-    @Autowired
-    ICarRepository carRepository;
-    @Autowired
     private CustomerService customerService;
-    @Autowired
-    IOrderRepository iOrderRepository;
     @Autowired
     private OrderService orderService;
 
     private static final Logger logger = LogManager.getLogger(AdminController.class);
 
-
     // -----------------------------------------------------------------------------------------------------------------
-    //   Methods CRUD
+    // Methods CRUD
     // -----------------------------------------------------------------------------------------------------------------
 
     @GetMapping("api/v1/allcars")
-    public List<Car> getAllCars(){return carService.getCars();}
+    public List<CarDto> getAllCars() {
+        return carService.getCars();
+    }
 
     /**
      * <code>AdminController</code> - CRUD(add car) commands for admin
+     * 
      * @authors Jean Kadahizi (jean.kadahizi@edu.edugrade.se)
      * @version 0.0.1
      * @return
      */
     @PostMapping("api/v1/addcar")
-    public  ResponseEntity<CarDto> addCar(@RequestBody CarDto car) {
-        carService.addCar(car);
-        logger.info("Admin added new car " + car.getFactory() + " " + car.getModel());
-        return new ResponseEntity<>(car,HttpStatus.CREATED);
+    public ResponseEntity<CarDto> addCar(@RequestBody CarDto car) {
+        if (carService.addCar(car)) {
+            return new ResponseEntity<>(car, HttpStatus.CREATED);
+        }
+        return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
     }
 
     /**
      * <code>AdminController</code> - CRUD(update car) commands for admin
+     * 
      * @authors Jean Kadahizi (jean.kadahizi@edu.edugrade.se)
      * @version 0.0.1
      * @return
      */
     @PutMapping("api/v1/updatecar")
-    public  ResponseEntity<CarDto> updateCar(@RequestBody CarDto car){
-        Optional<Car> carItem = carRepository.findById(car.getId());
-        if(carItem.isPresent()){
-            logger.info("Admin updated car " + carItem.get().getFactory() + " to " + car.getFactory());
-            carService.updateCar(car);
-            return  new ResponseEntity<>(car,HttpStatus.OK);
+    public ResponseEntity<CarDto> updateCar(@RequestBody CarDto car) {
+        if (carService.updateCar(car)) {
+            return new ResponseEntity<>(car, HttpStatus.OK);
         }
-        logger.error("Admin couldn't update car with id: " + car.getId());
-        return  new ResponseEntity<>(null,HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
     }
+
     /**
      * <code>AdminController</code> - CRUD(delete car) commands for admin
+     * 
      * @authors Jean Kadahizi (jean.kadahizi@edu.edugrade.se)
      * @version 0.0.1
      * @return
      */
     @DeleteMapping("api/v1/deletecar")
-    public ResponseEntity<String> deleteCar(@RequestBody Car car){
-        Optional<Car> carItem = carRepository.findById(car.getId());
-        if(carItem.isPresent()){
-            logger.info("Admin deleted car " + carItem.get().getFactory() + " " + carItem.get().getModel() );
-            carService.removeCar(car.getId());
+    public ResponseEntity<String> deleteCar(@RequestBody Car car) {
+        if (carService.removeCar(car.getId())) {
             return new ResponseEntity<>("Car deleted!", HttpStatus.OK);
         }
-        logger.error("Admin couldn't deleted car with id: " + car.getId());
         return new ResponseEntity<>("Car not deleted!", HttpStatus.NOT_FOUND);
     }
 
-
     @GetMapping("api/v1/customers")
-    public List<Customer> getCustomers(){ return customerService.getCustomers();}
-
+    public List<Customer> getCustomers() {
+        return customerService.getCustomers();
+    }
 
     /**
-     * <code>AdminController</code> - CRUD(create new  customer) commands for admin
+     * <code>AdminController</code> - CRUD(create new customer) commands for admin
+     * 
      * @authors Jean Kadahizi (jean.kadahizi@edu.edugrade.se)
      * @version 0.0.1
      */
     @PostMapping("api/v1/addcustomer")
-    public  ResponseEntity<CustomerDto> addCustomer(@RequestBody CustomerDto customer) {
-        customerService.addCustomer(customer);
-        logger.info("Admin added new customer " + customer.getFirstName() + " " + customer.getLastName());
-        return new ResponseEntity<>(customer,HttpStatus.CREATED);
+    public ResponseEntity<CustomerDto> addCustomer(@RequestBody CustomerDto customer) {
+        if(customerService.addCustomer(customer)){
+            return new ResponseEntity<>(customer, HttpStatus.CREATED);
+        }
+        return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
     }
 
     /**
      * <code>AdminController</code> - CRUD(update customer) commands for admin
+     * 
      * @authors Jean Kadahizi (jean.kadahizi@edu.edugrade.se)
      * @version 0.0.1
      * @return
      */
     @PutMapping("api/v1/updatecustomer")
-    public  ResponseEntity<CustomerDto> updateCustomer(@RequestBody CustomerDto customer){
-        Optional<Customer> customerItem = customerRepository.findById(customer.getId());
-        if(customerItem.isPresent()){
-            logger.info("Admin updated customer " + customerItem.get().getFirstName() + " " + customerItem.get().getLastName() + " to " + customer.getFirstName() + " " + customer.getLastName());
-            customerService.updateCustomer(customer);
-            return  new ResponseEntity<>(customer,HttpStatus.OK);
+    public ResponseEntity<CustomerDto> updateCustomer(@RequestBody CustomerDto customer) {
+       
+        if (customerService.updateCustomer(customer)) {
+            return new ResponseEntity<>(customer, HttpStatus.OK);
         }
-        logger.error("Admin couldn't update customer with id: " + customer.getId());
-        return  new ResponseEntity<>(null,HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
     }
-
 
     /**
      * <code>AdminController</code> - CRUD(delete customer) commands for admin
+     * 
      * @authors Jean Kadahizi (jean.kadahizi@edu.edugrade.se)
      * @version 0.0.1
      * @return
      */
     @DeleteMapping("api/v1/deletecustomer")
-    public ResponseEntity<String> deleteCustomer(@RequestBody Customer customer){
-        Optional<Customer> customerItem = customerRepository.findById(customer.getId());
-        if(customerItem.isPresent()){
-            logger.info("Admin deleted customer " + customerItem.get().getFirstName() + " " + customerItem.get().getLastName());
-            customerService.RemoveCustomer(customer.getId());
+    public ResponseEntity<String> deleteCustomer(@RequestBody Customer customer) {
+        if (customerService.RemoveCustomer(customer.getId())) {
             return new ResponseEntity<>("Customer deleted!", HttpStatus.OK);
         }
-        logger.info("Admin couldn't delete customer with id: " + customer.getId());
         return new ResponseEntity<>("Customer not deleted!", HttpStatus.NOT_FOUND);
     }
 
     @GetMapping("api/v1/orders")
-    public List<Orders> getAllOrders(){
+    public List<OrderDto> getAllOrders() {
         return orderService.getAllOrders();
     }
 
-
     @DeleteMapping("api/v1/deleteorder")
-    public ResponseEntity<String> deleteOrder(@RequestBody Orders orders){
-        Optional<Orders> ordersItem = iOrderRepository.findById(orders.getId());
-        if(ordersItem.isPresent()){
-            logger.info("Admin deleted order id: " + ordersItem.get().getId());
-            orderService.removeOrder(orders.getId());
+    public ResponseEntity<String> deleteOrder(@RequestBody Orders orders) {
+        if (orderService.removeOrder(orders.getId())) {
             return new ResponseEntity<>("Deleted order!", HttpStatus.OK);
         }
-        return new ResponseEntity<>("Could not delete orderId: " + orders.getId(),HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>("Could not delete orderId: " + orders.getId(), HttpStatus.NOT_FOUND);
     }
 }

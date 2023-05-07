@@ -13,13 +13,13 @@ import com.bravo.gruppbravowigellkoncernencarrental.models.dto.CustomerDto;
 
 public interface ICustomerService {
 
-    void addCustomer(CustomerDto dto);
+    boolean addCustomer(CustomerDto dto);
 
     List<Customer> getCustomers();
 
     CustomerDto getCustomer(Long id);
 
-    void updateCustomer(CustomerDto dto);
+    boolean updateCustomer(CustomerDto dto);
 
-    void RemoveCustomer(Long id);
+    boolean RemoveCustomer(Long id);
 }
