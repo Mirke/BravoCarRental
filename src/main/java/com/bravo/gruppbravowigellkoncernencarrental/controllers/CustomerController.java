@@ -46,7 +46,7 @@ public class CustomerController {
 
 
     @GetMapping("api/v1/myorders")
-    public List<Orders> getOrders(@RequestBody Customer customer){
+    public List<OrderDto> getOrders(@RequestBody Customer customer){
         return orderService.getCustomerOrders(customer.getId());
 }
 
